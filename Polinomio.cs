@@ -141,12 +141,64 @@ namespace Lagrange
             return producto;
         }
 
+        // Funcion que suma dos polinomios.
+        // La funcion recibe como argumentos
+        // dos polinomios para sumar.
+        // Devuelve el resultado como la suma.
         public static Polinomio Add(Polinomio p, Polinomio q) {
-            Polinomio resultante = new Polinomio(p.n);
+            // Polinomio resultante de la suma
+            Polinomio resultante;
 
-            for (int i = 0; i < resultante.n; i++)
-                resultante.coeficientes[i] = p.coeficientes[i] + q.coeficientes[i];
+            // Si el los polinomios son del mismo tamaño
+            // solo se suma termino por termino.
+            if(p.n == q.n) {
+                resultante = new Polinomio(p.n);
 
+                // Se suma termino por termino
+                for (int i = 0; i < resultante.n; i++)
+                    //Se guarda la suma de los terminos en el 
+                    //polinomio resultante.
+                    resultante.coeficientes[i] = p.coeficientes[i] + q.coeficientes[i];
+            
+            } else {
+                // Se define el polinomio de grado mayor y el 
+                // polinomio de grado menor.
+                Polinomio max, min;
+
+                // Variable auxiliar que guardará la 
+                // diferencia de terminos de los dos
+                // polinomios a sumar
+                int dif;
+
+                if(p.n < q.n) {
+                    max = q;
+                    min = p;
+                } else {
+                    max = p;
+                    min = q;
+                }
+
+                // El polinomio resultante será del mismo
+                // tamaño que el polinomio de grado mayor.
+                resultante = new Polinomio(max.n);
+
+                // Se calcula la diferencia de terminos.
+                dif = max.n - min.n;
+                
+                // Se almacenan los terminos no comunes de
+                // los polinomios en el polinomio resultante.
+                for(int i = 0; i < dif; i++) {
+                    resultante.coeficientes[i] = max.coeficientes[i];
+                }
+
+                // Se suman terminos comunes en el el 
+                // polinomio resultante.
+                for(int i = dif; i < max.n; i++) {
+                    resultante.coeficientes[i] = max.coeficientes[i] + min.coeficientes[i - dif];
+                }
+            }
+
+            // Se devuelve el polinomio resultante.
             return resultante;
         }
     }
