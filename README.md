@@ -69,3 +69,22 @@ Podemos realizar la multiplicacion de dos polinomios P(x) y Q(x) con la funcion 
   // Resultado en consola:
   // [ -6x^5 + 13x^4 + 31x^3 -23x^2 -27x + 12 ]
 ```
+
+## Sumando dos polinomios << P(x) + Q(x) >>
+Para sumar dos polinomios utiliza la funcion Add() que recibe como parametros dos polinomios del mismo tamaño y devuelve la suma
+
+```c#
+  // Creando un polinomio P(x) = x^3 + x^2 + x + 1
+  Polinomio p = new Polinomio(new double[]{1, 1, 1, 1});
+  
+  // Creando un polinomio Q(x) = 2x^3 + 2x^2 + 2x + 2
+  Polinomio q = new Polinomio(new double[]{2, 2, 2, 2});
+  
+  // Nuevo polinomio que guardará el polinomio resultante de la suma
+  Polinomio suma = Polinomio.Add(p, q);
+  
+  // Imprimiendo el polinomio resultante en notacion matematica
+  producto.Print();
+  
+  // Resultado en consola:
+  // [ 3x^3 + 3x^2 + 3x + 3 ]
