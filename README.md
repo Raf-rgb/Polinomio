@@ -71,7 +71,7 @@ Podemos realizar la multiplicacion de dos polinomios P(x) y Q(x) con la funcion 
 ```
 
 ## Sumando dos polinomios << P(x) + Q(x) >>
-Para sumar dos polinomios utiliza la funcion Add() que recibe como parametros dos polinomios del mismo tamaño y devuelve la suma
+Para sumar dos polinomios utiliza la funcion Add() que recibe como parametros dos polinomios y devuelve la suma
 
 ```c#
   // Creando un polinomio P(x) = x^3 + x^2 + x + 1
