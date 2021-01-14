@@ -1,6 +1,6 @@
 using System;
 
-namespace Lagrange 
+namespace Polinomios
 {
     class Polinomio 
     {
@@ -61,13 +61,13 @@ namespace Lagrange
                     if(coeficientes[i] > 0) polinomio += " +";
                     
                     // Se agrega el coeficiente si es mayor a 1
-                    if(coeficientes[i] != 1) polinomio += " " + coeficientes[i];
+                    if(coeficientes[i] != 1 && coeficientes[i] != 0) polinomio += " " + coeficientes[i];
 
                     // Si el grado es mayor a 1, se agrega
                     // la variable x y su respectivo grado.
                     // si no, entonces solo se agrega la
                     // variable x
-                    if(g > 1) polinomio += $"x^{g}";
+                    if(g > 1 && coeficientes[i] != 0) polinomio += $"x^{g}";
                     else polinomio += "x";
 
                     g--;
@@ -75,11 +75,8 @@ namespace Lagrange
 
                 // Si el valor constante del polinomio (el ultimo coeficiente)
                 // es positivo, se agrega el signo +
-                if(coeficientes[coeficientes.Length - 1] > 0) polinomio += " + ";
-                else polinomio += " ";
-
-                // Se agrega el valor constante del polinomio.
-                polinomio += coeficientes[coeficientes.Length - 1];
+                if(coeficientes[coeficientes.Length - 1] > 0) polinomio += " + " + coeficientes[coeficientes.Length - 1];
+                else if (coeficientes[coeficientes.Length - 1] < 0) polinomio += " " + coeficientes[coeficientes.Length - 1];
             } 
             // Si el polinomio tiene solo un coeficiente, entonces
             // es de grado 0, solo se imprime como constante.
