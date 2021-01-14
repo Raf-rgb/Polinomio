@@ -37,49 +37,58 @@ namespace Lagrange
             // al valor de la variable global grado.
             int g = grado;
 
-            // El primer termino siempre tiene el grado más alto
-            // por lo que directamente se concatena a la variable
-            // polinomio.
-            if(grado > 1) {
-                if(coeficientes[0] != 1) polinomio += $"{coeficientes[0]}x^{grado}";
-                else polinomio += $"x^{grado}";
-            } else {
-                if(coeficientes[0] != 1) polinomio += $"{coeficientes[0]}x";
-                else polinomio += $"x";
+            // Si el polinomio tiene más de 2 coeficientes
+            // quiere decir que su grado es mayor a 0
+            if(n > 1) {
+                // El primer termino siempre tiene el grado más alto
+                // por lo que directamente se concatena a la variable
+                // polinomio.
+                if(grado > 1) {
+                    if(coeficientes[0] != 1) polinomio += $"{coeficientes[0]}x^{grado}";
+                    else polinomio += $"x^{grado}";
+                } else {
+                    if(coeficientes[0] != 1) polinomio += $"{coeficientes[0]}x";
+                    else polinomio += $"x";
+                }
+
+                // Se pasa a un grado menor.
+                g = g - 1;
+
+                // Para cada coeficiente entre los extremos del polinomio
+                for(int i = 1; i < coeficientes.Length - 1; i++) {
+                    // Si el coeficiente es positivo, se agrega el
+                    // signo +
+                    if(coeficientes[i] > 0) polinomio += " +";
+                    
+                    // Se agrega el coeficiente si es mayor a 1
+                    if(coeficientes[i] != 1) polinomio += " " + coeficientes[i];
+
+                    // Si el grado es mayor a 1, se agrega
+                    // la variable x y su respectivo grado.
+                    // si no, entonces solo se agrega la
+                    // variable x
+                    if(g > 1) polinomio += $"x^{g}";
+                    else polinomio += "x";
+
+                    g--;
+                }
+
+                // Si el valor constante del polinomio (el ultimo coeficiente)
+                // es positivo, se agrega el signo +
+                if(coeficientes[coeficientes.Length - 1] > 0) polinomio += " + ";
+                else polinomio += " ";
+
+                // Se agrega el valor constante del polinomio.
+                polinomio += coeficientes[coeficientes.Length - 1];
+            } 
+            // Si el polinomio tiene solo un coeficiente, entonces
+            // es de grado 0, solo se imprime como constante.
+            else {
+                polinomio += coeficientes[0];
             }
-
-            // Se pasa a un grado menor.
-            g = g - 1;
-
-            // Para cada coeficiente entre los extremos del polinomio
-            for(int i = 1; i < coeficientes.Length - 1; i++) {
-                // Si el coeficiente es positivo, se agrega el
-                // signo +
-                if(coeficientes[i] > 0) polinomio += " +";
-                
-                // Se agrega el coeficiente si es mayor a 1
-                if(coeficientes[i] != 1) polinomio += " " + coeficientes[i];
-
-                // Si el grado es mayor a 1, se agrega
-                // la variable x y su respectivo grado.
-                // si no, entonces solo se agrega la
-                // variable x
-                if(g > 1) polinomio += $"x^{g}";
-                else polinomio += "x";
-
-                g--;
-            }
-
-            // Si el valor constante del polinomio (el ultimo coeficiente)
-            // es positivo, se agrega el signo +
-            if(coeficientes[coeficientes.Length - 1] > 0) polinomio += " + ";
-            else polinomio += " ";
-
-            // Se agrega el valor constante del polinomio.
-            polinomio += coeficientes[coeficientes.Length - 1];
 
             // Se imprime el polinomio en notacion matematica
-            Console.WriteLine($"[ {polinomio} ]");
+            Console.WriteLine($"[ {polinomio} ]\n");
         }
 
         // Funcion que imprime los coeficientes del
@@ -90,7 +99,7 @@ namespace Lagrange
                 Console.Write($" {coeficientes[i]}");
                 if(i < coeficientes.Length - 1) Console.Write(", ");
             }
-            Console.Write(" ]");
+            Console.Write(" ]\n");
         }
 
         // Funcion que calcula el producto de la multiplicacion
@@ -130,6 +139,15 @@ namespace Lagrange
 
             // Se devuelve el polinomio resultante
             return producto;
+        }
+
+        public static Polinomio Add(Polinomio p, Polinomio q) {
+            Polinomio resultante = new Polinomio(p.n);
+
+            for (int i = 0; i < resultante.n; i++)
+                resultante.coeficientes[i] = p.coeficientes[i] + q.coeficientes[i];
+
+            return resultante;
         }
     }
 }
